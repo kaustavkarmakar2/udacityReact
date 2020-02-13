@@ -1,13 +1,30 @@
 import React from "react";
+import * as BooksAPI from "../BooksAPI";
 
 class List extends React.Component {
   state = {
-    book: [],
+    books: [],
     query: ""
   };
-  
+  changeBookShelves = (book, shelf) => {
+    console.log("Hiii", this);
+    BooksAPI.update(book, shelf);
+    this.setState({
+      books: this.state.books.map(b => {
+        return {
+           ...b,
+          shelf: b.id === book.id ? shelf : b.shelf
+        };
+      })
+    });
+  };
 
   render() {
+    // const shelves = {
+    //   currentlyReading: ["Currently Reading", "currentlyReading"],
+    //   wantToRead: ["Want to Read", "wantToRead"],
+    //   read: ["Read", "read"]
+    // };
     
     return (
       <React.Fragment>
@@ -40,21 +57,26 @@ class List extends React.Component {
                       <div className="book-shelf-changer">
                         <select
                           className="id"
-                          value={"none"}
+                          value="none"
+                          
+                          // onBookShelfChange={this.props.onBookShelfChange}
                           onChange={event =>
-                            this.props.changeShelf(book, event.target.value)
+                            this.changeBookShelves(book, event.target.value)
                           }
+                          
+                          
                         >
                           <option value="move" disabled>
                             Move to...
                           </option>
                           <option value="currentlyReading">
-                            Currently Reading
+                          currentlyReading
                           </option>
                           <option value="wantToRead">Want to read</option>
                           <option value="read">read</option>
                           <option value="none">None</option>
                         </select>
+                        {console.log("shelf",book)}
                       </div>
                       Ï
                     </div>
@@ -64,7 +86,7 @@ class List extends React.Component {
                   </div>
                 </li> 
               )})}
-              
+             
             </ol>
             </div>
           </div>

@@ -34,18 +34,18 @@ class SearchForBooks extends React.Component {
       trailing: true
     });
   }
-  changeBookShelves = (book, shelf) => {
-    console.log("Hiii", this);
-    BooksAPI.update(book, shelf);
-    this.setState({
-      books: this.state.books.map(b => {
-        return {
-          ...b,
-          shelf: b.id === book.id ? shelf : b.shelf
-        };
-      })
-    });
-  };
+  // changeBookShelves = (book, shelf) => {
+  //   console.log("Hiii", this);
+  //   BooksAPI.update(book, shelf);
+  //   this.setState({
+  //     books: this.state.books.map(b => {
+  //       return {
+  //         ...b,
+  //         shelf: b.id === book.id ? shelf : b.shelf
+  //       };
+  //     })
+  //   });
+  // };
   handleBackClick = () => {
     this.props.onSearchBackClick();
     window.location.href = "/";
@@ -80,11 +80,12 @@ class SearchForBooks extends React.Component {
               }}
               // BookSearchAPI is giving inconsistent results
               // Please see
-
+              
               books={books ? (books.error === undefined ? books : []) : []}
-              onBookShelfChange={this.props.onBookShelfChange}
+              
               changeShelf={this.changeBookShelves}
             />
+            
           </div>
         </div>
       </div>
