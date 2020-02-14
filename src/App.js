@@ -71,7 +71,7 @@ class BooksApp extends React.Component {
           <Route
             path="/search"
             render={() => (
-              <SearchForBooks onSearchBackClick={this.handleSearchBackClick} />
+              <SearchForBooks onSearchBackClick={this.handleSearchBackClick} books={this.state.books}/>
             )}
           />
         </div>

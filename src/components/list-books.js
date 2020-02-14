@@ -4,10 +4,11 @@ import * as BooksAPI from "../BooksAPI";
 class List extends React.Component {
   state = {
     books: [],
-    query: ""
+    query: "",
+    shelves:[]
   };
   changeBookShelves = (book, shelf) => {
-    console.log("Hiii", this);
+    console.log("Hiii", book, shelf);
     BooksAPI.update(book, shelf);
     this.setState({
       books: this.state.books.map(b => {
@@ -15,17 +16,24 @@ class List extends React.Component {
            ...b,
           shelf: b.id === book.id ? shelf : b.shelf
         };
-      })
+      }),
+      shelves: this.state.shelves.length ? this.state.shelves.map(b => {
+        return {
+           ...b,
+          shelf: b.id === book.id ? shelf : b.shelf,
+        };
+      }) : [{
+        id: book.id,
+        shelf: shelf
+      }]
     });
   };
-
+  handleClick = () => {
+    this.changeBookShelves();
+  };
   render() {
-    // const shelves = {
-    //   currentlyReading: ["Currently Reading", "currentlyReading"],
-    //   wantToRead: ["Want to Read", "wantToRead"],
-    //   read: ["Read", "read"]
-    // };
-    
+    let shelves = this.state.shelves
+    // console.log(shelves,this.props.shelves)
     return (
       <React.Fragment>
         <div className="bookshelf">
@@ -33,7 +41,7 @@ class List extends React.Component {
           <div className="bookshelf-books">
             <ol className="books-grid">
               {this.props.books.map(book => {
-                
+                shelves = [...shelves, ...this.props.shelves].filter(s=>{return s.id===book.id})
                 let imageURL
                 if (book !== undefined) {
                   imageURL = book.imageLinks
@@ -57,14 +65,13 @@ class List extends React.Component {
                       <div className="book-shelf-changer">
                         <select
                           className="id"
-                          value="none"
+                          value={shelves.length?shelves[0].shelf:'none'}
                           
                           // onBookShelfChange={this.props.onBookShelfChange}
                           onChange={event =>
                             this.changeBookShelves(book, event.target.value)
                           }
-                          
-                          
+                          onSearchClick={this.handleClick}
                         >
                           <option value="move" disabled>
                             Move to...
@@ -76,7 +83,7 @@ class List extends React.Component {
                           <option value="read">read</option>
                           <option value="none">None</option>
                         </select>
-                        {console.log("shelf",book)}
+                        {console.log("shelf",this.props.shelves.filter(s=>{return s.id===book.id}))}
                       </div>
                       Ï
                     </div>

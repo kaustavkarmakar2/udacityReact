@@ -63,48 +63,7 @@ class BookShelf extends React.Component {
                 
                
               return (
-                // <li key={book.id}>
-                //   <div className="book">
-                //     <div className="book-top">
-                //       <div
-                //         className="book-cover"
-                //         style={{
-                //           width: 128,
-                //           height: 193,
-                //           backgroundImage: `url(${imageURL})`
-                         
-                //         }}
-                //       ></div>
-
-                //       <div className="book-shelf-changer">
-                //         <select
-                //           className="id"
-                //           value={book.shelf}
-                //           // changeShelf={this.changeBookShelvesForBooks}
-                //           onChange={event =>
-                //             this.changeBookShelvesForBooks(book, event.target.value)
-                //           }
-                //           allBooksForSheveles={this.state.books}
-                          
-                //         >
-                //           <option value="move" disabled>
-                //             Move to...
-                //           </option>
-                //           <option value={shelves}>
-                //               {book.shelf?book.shelf:null}
-                //           </option>
-                //           <option value={shelves}>Want to read</option>
-                //           <option value="read">read</option>
-                //           <option value="none">None</option>
-                //         </select>
-                //       </div>
-                //       Ï
-                //     </div>
-                //     <div className="book-title">{book.title}</div>
-                //     <div className="book-authors">{book.authors}</div>
-                    
-                //   </div>
-                // </li> 
+                
                 <li key={book.id}>
                 <div className="book">
                   <div className="book-top">
@@ -125,8 +84,8 @@ class BookShelf extends React.Component {
                         onChange={event =>
                           this.changeBookShelvesForBooks(book, event.target.value)
                         }
-                        allBooksForSheveles={this.state.books}
-                        changeShelf={this.changeBookShelvesForBooks}
+                        // allBooksForSheveles={this.state.books}
+                        // changeShelf={this.changeBookShelvesForBooks}
                       >
                         <option value="move" disabled>
                           Move to...
@@ -172,47 +131,7 @@ class BookShelf extends React.Component {
                 
                
               return (
-                // <li key={book.id}>
-                //   <div className="book">
-                //     <div className="book-top">
-                //       <div
-                //         className="book-cover"
-                //         style={{
-                //           width: 128,
-                //           height: 193,
-                //           backgroundImage: `url(${imageURL})`
-                         
-                //         }}
-                //       ></div>
-
-                //       <div className="book-shelf-changer">
-                //         <select
-                //           className="id"
-                //           value={book.shelf}
-                        
-                //           onChange={event =>
-                //             this.changeBookShelvesForBooks(book, event.target.value)
-                //           }
-                //           allBooksForSheveles={this.state.books}
-                //         >
-                //           <option value="move" disabled>
-                //             Move to...
-                //           </option>
-                //           <option value="currentlyReading">
-                //           {book.shelf?book.shelf:null}Currently Reading
-                //           </option>
-                //           <option value="wantToRead">Want to read</option>
-                //           <option value="read">read</option>
-                //           <option value="none">None</option>
-                //         </select>
-                //       </div>
-                //       Ï
-                //     </div>
-                //     <div className="book-title">{book.title}</div>
-                //     <div className="book-authors">{book.authors}</div>
-                    
-                //   </div>
-                // </li> 
+                
                 <li key={book.id}>
                   <div className="book">
                     <div className="book-top">
@@ -233,8 +152,8 @@ class BookShelf extends React.Component {
                           onChange={event =>
                             this.changeBookShelvesForBooks(book, event.target.value)
                           }
-                          allBooksForSheveles={this.state.books}
-                          changeShelf={this.changeBookShelvesForBooks}
+                          // allBooksForSheveles={this.state.books}
+                          // changeShelf={this.changeBookShelvesForBooks}
                         >
                           <option value="move" disabled>
                             Move to...
@@ -266,7 +185,7 @@ class BookShelf extends React.Component {
 
             <h2 className="bookshelf-title">Read</h2>
         <div className="bookshelf-books">
-            <ol className="books-grid">
+          <ol className="books-grid">
               {
                 this.state.books.filter(book => book.shelf === "read").map((book, index) => {
                   console.log("books",book)
@@ -302,7 +221,7 @@ class BookShelf extends React.Component {
                             this.changeBookShelvesForBooks(book, event.target.value)
                           }
                           // allBooksForSheveles={this.state.books}
-                          changeShelf={this.changeBookShelvesForBooks}
+                          // changeShelf={this.changeBookShelvesForBooks}
                         >
                           <option value="move" disabled>
                             Move to...
@@ -323,14 +242,10 @@ class BookShelf extends React.Component {
                   </div>
                 </li> 
               )
-            })
-            
+            })}
               
-              
-              }
-              
-            </ol>
-            </div>
+          </ol>
+        </div>
         
       </div>
       </React.Fragment>
@@ -338,42 +253,3 @@ class BookShelf extends React.Component {
   }
 }
 export default BookShelf;
-/* <div className="bookshelf-books">
-          <ol className="books-grid">
-            {shelfForBooks.map(book => (
-              <li key={book.id}>
-                <div className="book">
-                  <div className="book-top">
-                    <div
-                      className="book-cover"
-                      style={{
-                        width: 128,
-                        height: 193,
-                        backgroundImage: `url(${book.imageLinks.thumbnail}`
-                      }}
-                    ></div>
-
-                    <div className="book-shelf-changer">
-                      <select
-                        value={book.shelf}
-                        onChange={e =>
-                          this.props.changeShelf(book, e.target.value)
-                        }
-                      >
-                        <option value="move" disabled>
-                          Move to...
-                        </option>
-                        <option value="currentlyReading">Currently read</option>
-                        <option value="wantToRead">Want to read</option>
-                        <option value="read">readForBooks</option>
-                        <option value="none">None</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="book-title">{book.title}</div>
-                  <div className="book-authors">{book.authors}</div>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div> */

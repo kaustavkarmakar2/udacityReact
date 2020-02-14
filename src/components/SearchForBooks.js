@@ -82,6 +82,7 @@ class SearchForBooks extends React.Component {
               // Please see
               
               books={books ? (books.error === undefined ? books : []) : []}
+              shelves={this.props.books}
               
               changeShelf={this.changeBookShelves}
             />
