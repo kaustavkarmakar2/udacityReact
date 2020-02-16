@@ -18,7 +18,8 @@ class BooksApp extends React.Component {
      */
     showSearchPage: false,
     books: [],
-    isLoading: false
+    isLoading: false,
+    shelves:[]
   };
   updatedshowSearchPageState = state => {
     this.setState({ showSearchPage: state });
@@ -38,7 +39,15 @@ class BooksApp extends React.Component {
           ...b,
           shelf: b.id === book.id ? shelf : b.shelf
         };
-      })
+      }),shelves: this.state.shelves.length ? this.state.shelves.push(b => {
+            return {
+               ...b,
+              shelf: b.id === book.id ? shelf : b.shelf,
+            };
+          }) : [{
+            id: book.id,
+            shelf: shelf
+          }]
     });
   };
   handleSearchBackClick = () => {
@@ -71,7 +80,11 @@ class BooksApp extends React.Component {
           <Route
             path="/search"
             render={() => (
-              <SearchForBooks onSearchBackClick={this.handleSearchBackClick} books={this.state.books}/>
+              <SearchForBooks 
+                onSearchBackClick={this.handleSearchBackClick} 
+                books={this.state.books}
+                changeBookShelvesForBooks={this.changeBookShelvesForBooks}
+              />
             )}
           />
         </div>

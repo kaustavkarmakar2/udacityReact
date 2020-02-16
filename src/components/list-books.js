@@ -8,31 +8,33 @@ class List extends React.Component {
     shelves:[]
   };
   changeBookShelves = (book, shelf) => {
-    console.log("Hiii", book, shelf);
-    BooksAPI.update(book, shelf);
-    this.setState({
-      books: this.state.books.map(b => {
-        return {
-           ...b,
-          shelf: b.id === book.id ? shelf : b.shelf
-        };
-      }),
-      shelves: this.state.shelves.length ? this.state.shelves.map(b => {
-        return {
-           ...b,
-          shelf: b.id === book.id ? shelf : b.shelf,
-        };
-      }) : [{
-        id: book.id,
-        shelf: shelf
-      }]
-    });
+    
+    this.props.changeShelf(book, shelf);
+    // console.log("Hiii", book, shelf);
+    // BooksAPI.update(book, shelf);
+    // this.setState({
+    //   books: this.state.books.map(b => {
+    //     return {
+    //        ...b,
+    //       shelf: b.id === book.id ? shelf : b.shelf
+    //     };
+    //   }),
+    //   shelves: this.state.shelves.length ? this.state.shelves.map(b => {
+    //     return {
+    //        ...b,
+    //       shelf: b.id === book.id ? shelf : b.shelf,
+    //     };
+    //   }) : [{
+    //     id: book.id,
+    //     shelf: shelf
+    //   }]
+    // });
   };
   handleClick = () => {
     this.changeBookShelves();
   };
   render() {
-    let shelves = this.state.shelves
+    let shelves = this.props.shelves
     // console.log(shelves,this.props.shelves)
     return (
       <React.Fragment>
@@ -40,6 +42,8 @@ class List extends React.Component {
           <h2 className="bookshelf-title">{this.props.title}</h2>
           <div className="bookshelf-books">
             <ol className="books-grid">
+            
+             
               {this.props.books.map(book => {
                 shelves = [...shelves, ...this.props.shelves].filter(s=>{return s.id===book.id})
                 let imageURL

@@ -52,6 +52,9 @@ class SearchForBooks extends React.Component {
   };
 
   render() {
+    const { changeBookShelvesForBooks } = this.props;
+    const booksInMyLibrary = this.props.books;
+
     const { books, query } = this.state;
     return (
       <div className="search-books">
@@ -82,9 +85,8 @@ class SearchForBooks extends React.Component {
               // Please see
               
               books={books ? (books.error === undefined ? books : []) : []}
-              shelves={this.props.books}
-              
-              changeShelf={this.changeBookShelves}
+              shelves={this.props.books}              
+              changeShelf={this.props.changeBookShelvesForBooks}
             />
             
           </div>
